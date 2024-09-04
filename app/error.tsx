@@ -4,28 +4,19 @@ import { useEffect } from "react";
 
 export default function Error({
   error,
-  reset,
 }: {
   error: Error;
   reset: () => void;
 }) {
   useEffect(() => {
-    // Log the error to an error reporting service
-    /* eslint-disable no-console */
     console.error(error);
   }, [error]);
 
   return (
-    <div>
-      <h2>Something went wrong!</h2>
-      <button
-        onClick={
-          // Attempt to recover by trying to re-render the segment
-          () => reset()
-        }
-      >
-        Try again
-      </button>
+    <div className="flex justify-center">
+      <div className="w-1/2 flex-col text-center">
+        <p className="text-2xl text-gray-400">Something went wrong! :(</p>
+      </div>
     </div>
   );
 }

@@ -8,6 +8,7 @@ import { Providers } from "./providers";
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
+import { gradient } from "@/components/primitives";
 
 export const metadata: Metadata = {
   title: {
@@ -52,10 +53,10 @@ export default function RootLayout({
                 isExternal
                 className="flex items-center gap-1 text-current"
                 href="https://bsky.app/profile/lukenoutte.bsky.social"
-                title="lukenoutte bsky"
+                title="bsky profile"
               >
                 <span className="text-default-400">Powered by</span>
-                <p className="text-primary">Lukenoutte</p>
+                <p className="text-[#5EA2EF]">Lukenoutte</p>
               </Link>
             </footer>
           </div>
