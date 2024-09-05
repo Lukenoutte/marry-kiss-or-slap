@@ -1,53 +1,72 @@
 "use client";
 
-import { Card, CardFooter, CardHeader, CardBody } from "@nextui-org/card";
+import { Card, CardFooter } from "@nextui-org/card";
 import { Image } from "@nextui-org/image";
 import { Button } from "@nextui-org/button";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
-import { returnRandomItensOnList } from "@/utils/shared";
+import CardSkeleton from "./card-skeleton";
+import { ArrowLeftIcon, ArrowRightIcon, ShuffleIcon } from "./icons";
+
+import {
+  hasDuplicateItems,
+  noPicture,
+  returnRandomItensOnList,
+} from "@/utils/shared";
 import { BlueSkyUser } from "@/interfaces";
 
 export default function RandomUserSelection({
-  followersList,
-  followsList,
+  followerList,
+  followList,
   isLoading,
+  onClickBackButton,
+  setCurrentStep,
+  setChosenList,
+  chosenList,
 }: RandomUserSelectionProps) {
-  const [usersSelected, setUsersSelected] = useState<BlueSkyUser[]>([]);
-
   function getRandomUsers() {
     let randomFollows: BlueSkyUser[] = [];
     let randomFollowers: BlueSkyUser[] = [];
 
     randomFollows = returnRandomItensOnList<BlueSkyUser>({
-      list: followsList,
+      list: followList,
       quatityOfItens: 2,
     });
     randomFollowers = returnRandomItensOnList<BlueSkyUser>({
-      list: followersList,
+      list: followerList,
       quatityOfItens: 1,
     });
-    setUsersSelected([...randomFollows, ...randomFollowers]);
-    console.log("usersSelected", usersSelected);
+    const selected: BlueSkyUser[] = [...randomFollows, ...randomFollowers];
+
+    if (hasDuplicateItems<BlueSkyUser>({ list: selected, key: "handle" }))
+      return getRandomUsers();
+    setChosenList(selected);
   }
 
   useEffect(() => {
-    if (followersList.length && followsList.length) getRandomUsers();
+    if (followerList.length && followList.length && !chosenList.length) getRandomUsers();
   }, [isLoading]);
 
   return (
     <div className="w-full">
+      {isLoading && (
+        <div className="flex flex-row gap-4 justify-between">
+          <CardSkeleton />
+          <CardSkeleton />
+          <CardSkeleton />
+        </div>
+      )}
       <div className="flex flex-row gap-4 justify-between">
-        {usersSelected.map((user, index) => (
+        {chosenList.map((user, index) => (
           <div key={index}>
             <Card className="border-none p-2" radius="lg">
               <Image
-                isZoomed
+                isBlurred
                 alt="Profile Pic"
                 className="object-cover"
                 height={200}
                 isLoading={isLoading}
-                src={user.avatar}
+                src={user.avatar || noPicture}
                 width={250}
               />
               <CardFooter>
@@ -57,29 +76,53 @@ export default function RandomUserSelection({
           </div>
         ))}
       </div>
-      <div className="mt-3 flex justify-between">
+      <div className="mt-8 flex justify-between">
+        <div className="w-1/3 flex justify-start">
+          <Button
+            className="shadow-lg m"
+            color="primary"
+            disabled={isLoading}
+            radius="full"
+            startContent={<ArrowLeftIcon color="#0072F5" size={20} />}
+            variant="bordered"
+            onClick={onClickBackButton}
+          />
+        </div>
         <Button
-          className="shadow-lg mt-4"
+          className="shadow-lg"
           color="primary"
+          disabled={isLoading}
+          endContent={<ShuffleIcon color="#0072F5" size={22} />}
           radius="full"
           variant="bordered"
           onClick={getRandomUsers}
         >
           Escolher Outros
         </Button>
-        <Button
-          className="bg-gradient-to-tr from-[#0072F5] to-[#5EA2EF] text-white shadow-lg mt-4"
-          radius="full"
-        >
-          Continue
-        </Button>
+        <div className="w-1/3 flex justify-end">
+          <Button
+            className="bg-gradient-to-tr from-[#0072F5] to-[#5EA2EF] text-white shadow-lg"
+            color="primary"
+            disabled={isLoading}
+            endContent={<ArrowRightIcon color="white" size={20} />}
+            radius="full"
+            variant="shadow"
+            onClick={() => setCurrentStep(3)}
+          >
+            Continue
+          </Button>
+        </div>
       </div>
     </div>
   );
 }
 
 type RandomUserSelectionProps = {
-  followersList: BlueSkyUser[];
-  followsList: BlueSkyUser[];
+  followerList: BlueSkyUser[];
+  followList: BlueSkyUser[];
   isLoading: boolean;
+  onClickBackButton: () => void;
+  setCurrentStep: (step: number) => void;
+  setChosenList: (chosens: BlueSkyUser[]) => void;
+  chosenList: BlueSkyUser[];
 };

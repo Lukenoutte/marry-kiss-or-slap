@@ -8,6 +8,7 @@ import { Providers } from "./providers";
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
+import { BlueSkyIcon } from "@/components/icons";
 
 export const metadata: Metadata = {
   title: {
@@ -54,8 +55,9 @@ export default function RootLayout({
                 href="https://bsky.app/profile/lukenoutte.bsky.social"
                 title="bsky profile"
               >
-                <span className="text-default-400">Powered by</span>
-                <p className="text-[#5EA2EF]">Lukenoutte</p>
+                <span className="text-default-500 text-xs">Powered by</span>
+                <p className="text-primary text-xs">Lukenoutte</p>
+                <BlueSkyIcon size={17} />
               </Link>
             </footer>
           </div>

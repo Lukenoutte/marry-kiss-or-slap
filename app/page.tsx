@@ -8,21 +8,23 @@ import RandomUserSelection from "@/components/random-user-seletion";
 import { gradient } from "@/components/primitives";
 import { BlueSkyUser } from "@/interfaces";
 import { repeatRequests } from "@/utils/shared";
+import ClassifyChosen from "@/components/classify-chosen";
 
 export default function Home() {
   const [serviceName, setServiceName] = useState<string>("bsky.social");
   const [username, setUsername] = useState<string>("");
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [followersList, setFollowersList] = useState<BlueSkyUser[]>([]);
-  const [followsList, setFollowsList] = useState<BlueSkyUser[]>([]);
+  const [chosenList, setChosenList] = useState<BlueSkyUser[]>([]);
+  const [followerList, setFollowerList] = useState<BlueSkyUser[]>([]);
+  const [followList, setFollowList] = useState<BlueSkyUser[]>([]);
   const bskyApi = new BskyApi();
 
   async function searchUserInfo() {
     if (!username || !serviceName) return;
     setCurrentStep(2);
-    setFollowersList([]);
-    setFollowsList([]);
+    setFollowerList([]);
+    setFollowList([]);
     const actor = `${username}.${serviceName}`;
 
     try {
@@ -32,12 +34,22 @@ export default function Home() {
         repeatRequests({ functionResquest: bskyApi.getFollows, actor }),
       ]);
 
-      setFollowersList(followersResult);
-      setFollowsList(followsResult);
+      setFollowerList(followersResult);
+      setFollowList(followsResult);
     } catch (error) {
       setCurrentStep(1);
     } finally {
       setIsLoading(false);
+    }
+  }
+
+  function onClickBackButton() {
+    if (currentStep === 3) setCurrentStep(2);
+    if (currentStep === 2) {
+      setCurrentStep(1);
+      setFollowerList([]);
+      setFollowList([]);
+      setChosenList([]);
     }
   }
 
@@ -68,9 +80,23 @@ export default function Home() {
             </div>
             <div className="mt-4">
               <RandomUserSelection
-                followersList={followersList}
-                followsList={followsList}
+                chosenList={chosenList}
+                followList={followList}
+                followerList={followerList}
                 isLoading={isLoading}
+                setChosenList={setChosenList}
+                setCurrentStep={setCurrentStep}
+                onClickBackButton={onClickBackButton}
+              />
+            </div>
+          </div>
+        )}
+        {currentStep === 3 && (
+          <div>
+            <div className="mt-4">
+              <ClassifyChosen
+                chosenList={chosenList}
+                onClickBackButton={onClickBackButton}
               />
             </div>
           </div>

@@ -13,6 +13,14 @@ module.exports = {
         sans: ["var(--font-sans)"],
         mono: ["var(--font-mono)"],
       },
+      colors: {
+        primary: {
+          DEFAULT: '#0072F5'
+        },
+        secondary: {
+          DEFAULT: '#FF72E1'
+        },
+      },
     },
   },
   darkMode: "class",

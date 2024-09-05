@@ -53,3 +53,23 @@ export function returnRandomItensOnList<T>({
 
   return randomItems;
 }
+
+export function hasDuplicateItems<T>({
+  list,
+  key,
+}: {
+  list: T[];
+  key: keyof T;
+}): boolean {
+  const values: Set<T[keyof T]> = new Set();
+
+  return list.some((item) => {
+    if (values.has(item[key])) return true;
+    values.add(item[key]);
+
+    return false;
+  });
+}
+
+export const noPicture =
+  "https://cdn.bsky.app/img/avatar/plain/did:plc:bbymmiqltjwzyrikqh362efy/bafkreied5mcljllqvtebhxsvrbj7gci6qvuqqvxbectveemrkqv2seqwne@jpeg";
