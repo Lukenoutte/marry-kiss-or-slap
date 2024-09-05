@@ -1,64 +1,81 @@
 "use client";
 
-import { BskyApi } from "@/api/bsky-api";
-import UsernameCard from "@/components/username-card";
 import { useState } from "react";
 
+import { BskyApi } from "@/api/bsky-api";
+import UsernameProvider from "@/components/username-provider";
+import RandomUserSelection from "@/components/random-user-seletion";
+import { gradient } from "@/components/primitives";
+import { BlueSkyUser } from "@/interfaces";
+import { repeatRequests } from "@/utils/shared";
+
 export default function Home() {
-  const [serviceName, setServiceName] = useState("bsky.social")
-  const [username, setUsername] = useState("")
-  const bskyApi = new BskyApi()
-  let followersList: BlueSkyUser[] = []
-  let followsList: BlueSkyUser[] = []
+  const [serviceName, setServiceName] = useState<string>("bsky.social");
+  const [username, setUsername] = useState<string>("");
+  const [currentStep, setCurrentStep] = useState<number>(1);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [followersList, setFollowersList] = useState<BlueSkyUser[]>([]);
+  const [followsList, setFollowsList] = useState<BlueSkyUser[]>([]);
+  const bskyApi = new BskyApi();
 
-  async function repeatRequests ({ functionResquest, maxAttempts = 5, actor }: {
-    functionResquest: ApiResquestFunction, maxAttempts?: number, actor: string
-  }) {
-    const dataList = []
-    let attempt = 0;
-    let cursor: string | undefined = undefined;
-    do {
-      const { data, cursor: newCursor } = await functionResquest({actor, cursor});
-      dataList.push(...data);
-      cursor = newCursor;
-      attempt++;
-    } while (cursor && attempt < maxAttempts)
-    return dataList
-  }
+  async function searchUserInfo() {
+    if (!username || !serviceName) return;
+    setCurrentStep(2);
+    setFollowersList([]);
+    setFollowsList([]);
+    const actor = `${username}.${serviceName}`;
 
-  async function onClickContinue () {
-    if (!username || !serviceName) return
-    followsList = []
-    followersList = []
-    const actor = `${username}.${serviceName}`
-    const [followersResult, followsResult] = await Promise.all([
-      repeatRequests({ functionResquest: bskyApi.getFollowers, actor }),
-      repeatRequests({ functionResquest: bskyApi.getFollows, actor })
-    ])
-    followersList.push(...followersResult)
-    followsList.push(...followsResult)
+    try {
+      setIsLoading(true);
+      const [followersResult, followsResult] = await Promise.all([
+        repeatRequests({ functionResquest: bskyApi.getFollowers, actor }),
+        repeatRequests({ functionResquest: bskyApi.getFollows, actor }),
+      ]);
+
+      setFollowersList(followersResult);
+      setFollowsList(followsResult);
+    } catch (error) {
+      setCurrentStep(1);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
     <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-      <div className="inline-block max-w-md text-center justify-center">
-        <h1 className="text-4xl">👰‍♀️💋🔪</h1>
-        <div className="mt-8">
-          <UsernameCard 
-            username={username}
-            setUsername={setUsername}
-            serviceName={serviceName}
-            setServiceName={setServiceName}
-            onClickContinue={onClickContinue}
-          />
-        </div>
+      <div className="inline-block text-center justify-center items-center">
+        {currentStep === 1 && (
+          <div>
+            <h1 className="text-4xl">👰‍♀️💋🔪</h1>
+            <div className="mt-8">
+              <UsernameProvider
+                serviceName={serviceName}
+                setServiceName={setServiceName}
+                setUsername={setUsername}
+                username={username}
+                onSubmit={searchUserInfo}
+              />
+            </div>
+          </div>
+        )}
+        {currentStep === 2 && (
+          <div>
+            <div className="flex flex-row items-center">
+              <span className="text-4xl mr-4">🤔</span>
+              <h2 className={gradient({ color: "blue", size: "xs" })}>
+                Os escolhidos foram...
+              </h2>
+            </div>
+            <div className="mt-4">
+              <RandomUserSelection
+                followersList={followersList}
+                followsList={followsList}
+                isLoading={isLoading}
+              />
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
 }
-
-type BlueSkyUser = {handle: string, displayName: string, avatar: string}
-type ApiResquestFunction = ({ actor, cursor }: { actor: string, cursor?: string }) => Promise<{
-  data: BlueSkyUser[],
-  cursor?: string
-}>

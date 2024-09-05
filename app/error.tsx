@@ -2,13 +2,9 @@
 
 import { useEffect } from "react";
 
-export default function Error({
-  error,
-}: {
-  error: Error;
-  reset: () => void;
-}) {
+export default function Error({ error }: { error: Error; reset: () => void }) {
   useEffect(() => {
+    // eslint-disable-next-line no-console
     console.error(error);
   }, [error]);
 
