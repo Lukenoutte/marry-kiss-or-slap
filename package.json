@@ -1,5 +1,5 @@
 {
-	"name": "marry-kiss-or-kill",
+	"name": "marry-kiss-or-slap",
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
@@ -20,6 +20,7 @@
 		"@nextui-org/switch": "2.0.33",
 		"@nextui-org/system": "2.2.5",
 		"@nextui-org/theme": "2.2.9",
+		"@nextui-org/user": "^2.0.33",
 		"@react-aria/ssr": "3.9.4",
 		"@react-aria/visually-hidden": "3.8.12",
 		"clsx": "2.1.1",

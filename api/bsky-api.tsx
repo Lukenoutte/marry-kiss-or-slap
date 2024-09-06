@@ -1,4 +1,4 @@
-import { BlueSkyUser } from "@/interfaces";
+import { BlueSkyUser } from "@/types";
 import FetchWrapper from "@/utils/fetch";
 
 const fetch = new FetchWrapper("https://public.api.bsky.app");

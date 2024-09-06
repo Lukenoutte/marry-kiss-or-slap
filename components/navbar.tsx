@@ -23,7 +23,7 @@ export const Navbar = () => {
               <span
                 className={`${gradient({ color: "pink", size: "sm" })} ml-2`}
               >
-                Kill
+                Slap
               </span>
             </p>
           </NextLink>

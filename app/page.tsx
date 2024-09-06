@@ -6,7 +6,7 @@ import { BskyApi } from "@/api/bsky-api";
 import UsernameProvider from "@/components/username-provider";
 import RandomUserSelection from "@/components/random-user-seletion";
 import { gradient } from "@/components/primitives";
-import { BlueSkyUser } from "@/interfaces";
+import { BlueSkyUser } from "@/types";
 import { repeatRequests } from "@/utils/shared";
 import ClassifyChosen from "@/components/classify-chosen";
 
@@ -57,9 +57,13 @@ export default function Home() {
     <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
       <div className="inline-block text-center justify-center items-center">
         {currentStep === 1 && (
-          <div>
-            <h1 className="text-4xl">👰‍♀️💋🔪</h1>
-            <div className="mt-8">
+          <div className="flex-col flex items-center">
+            <h1 className="text-5xl">
+              👰‍♀️
+              <span className={gradient({ color: "pink" })}>💋</span>
+              🖐️
+            </h1>
+            <div className="mt-8 w-[350px]">
               <UsernameProvider
                 serviceName={serviceName}
                 setServiceName={setServiceName}
@@ -68,15 +72,19 @@ export default function Home() {
                 onSubmit={searchUserInfo}
               />
             </div>
+            <div className="mt-12 w-[350px]">
+              <p className="text-default-500 text-tiny">
+                Lembre-se de que o objetivo é entreter, então, se algo te deixar
+                desconfortável, não hesite em nos contatar.
+              </p>
+            </div>
           </div>
         )}
         {currentStep === 2 && (
           <div>
             <div className="flex flex-row items-center">
               <span className="text-4xl mr-4">🤔</span>
-              <h2 className={gradient({ color: "blue", size: "xs" })}>
-                Os escolhidos foram...
-              </h2>
+              <h2 className="font-bold">Os escolhidos foram...</h2>
             </div>
             <div className="mt-4">
               <RandomUserSelection
@@ -92,7 +100,7 @@ export default function Home() {
           </div>
         )}
         {currentStep === 3 && (
-          <div>
+          <div style={{ display: currentStep === 3 ? "block" : "none" }}>
             <div className="mt-4">
               <ClassifyChosen
                 chosenList={chosenList}

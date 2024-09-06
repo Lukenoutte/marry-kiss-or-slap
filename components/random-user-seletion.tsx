@@ -13,7 +13,7 @@ import {
   noPicture,
   returnRandomItensOnList,
 } from "@/utils/shared";
-import { BlueSkyUser } from "@/interfaces";
+import { BlueSkyUser } from "@/types";
 
 export default function RandomUserSelection({
   followerList,
@@ -44,7 +44,7 @@ export default function RandomUserSelection({
   }
 
   useEffect(() => {
-    if (followerList.length && followList.length && !chosenList.length) getRandomUsers();
+    if (!chosenList.length) getRandomUsers();
   }, [isLoading]);
 
   return (
