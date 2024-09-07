@@ -5,15 +5,15 @@ import { Image } from "@nextui-org/image";
 import { Button } from "@nextui-org/button";
 import React, { useEffect } from "react";
 
-import CardSkeleton from "./card-skeleton";
-import { ArrowLeftIcon, ArrowRightIcon, ShuffleIcon } from "./icons";
+import CardSkeleton from "../card-skeleton";
+import { ArrowLeftIcon, ArrowRightIcon, ShuffleIcon } from "../icons";
 
+import { noPicture } from "@/utils/index";
 import {
   hasDuplicateItems,
-  noPicture,
   returnRandomItensOnList,
-} from "@/utils/shared";
-import { BlueSkyUser } from "@/types";
+} from "@/utils/shared-functions";
+import { UserType } from "@/types";
 
 export default function RandomUserSelection({
   followerList,
@@ -25,20 +25,20 @@ export default function RandomUserSelection({
   chosenList,
 }: RandomUserSelectionProps) {
   function getRandomUsers() {
-    let randomFollows: BlueSkyUser[] = [];
-    let randomFollowers: BlueSkyUser[] = [];
+    let randomFollows: UserType[] = [];
+    let randomFollowers: UserType[] = [];
 
-    randomFollows = returnRandomItensOnList<BlueSkyUser>({
+    randomFollows = returnRandomItensOnList<UserType>({
       list: followList,
       quatityOfItens: 2,
     });
-    randomFollowers = returnRandomItensOnList<BlueSkyUser>({
+    randomFollowers = returnRandomItensOnList<UserType>({
       list: followerList,
       quatityOfItens: 1,
     });
-    const selected: BlueSkyUser[] = [...randomFollows, ...randomFollowers];
+    const selected: UserType[] = [...randomFollows, ...randomFollowers];
 
-    if (hasDuplicateItems<BlueSkyUser>({ list: selected, key: "handle" }))
+    if (hasDuplicateItems<UserType>({ list: selected, key: "handle" }))
       return getRandomUsers();
     setChosenList(selected);
   }
@@ -118,11 +118,11 @@ export default function RandomUserSelection({
 }
 
 type RandomUserSelectionProps = {
-  followerList: BlueSkyUser[];
-  followList: BlueSkyUser[];
+  followerList: UserType[];
+  followList: UserType[];
   isLoading: boolean;
   onClickBackButton: () => void;
   setCurrentStep: (step: number) => void;
-  setChosenList: (chosens: BlueSkyUser[]) => void;
-  chosenList: BlueSkyUser[];
+  setChosenList: (chosens: UserType[]) => void;
+  chosenList: UserType[];
 };

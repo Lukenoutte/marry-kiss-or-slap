@@ -1,4 +1,4 @@
-import { BlueSkyUser } from "@/types";
+import { UserType } from "@/types";
 import FetchWrapper from "@/utils/fetch";
 
 const fetch = new FetchWrapper("https://public.api.bsky.app");
@@ -10,7 +10,7 @@ export class BskyApi {
   }: {
     actor: string;
     cursor?: string;
-  }): Promise<{ cursor?: string; data: BlueSkyUser[] }> {
+  }): Promise<{ cursor?: string; data: UserType[] }> {
     let query: QueryType = { actor, limit: 100 };
 
     if (cursor) query = { ...query, cursor };
@@ -29,7 +29,7 @@ export class BskyApi {
   }: {
     actor: string;
     cursor?: string;
-  }): Promise<{ cursor?: string; data: BlueSkyUser[] }> {
+  }): Promise<{ cursor?: string; data: UserType[] }> {
     let query: QueryType = { actor, limit: 100 };
 
     if (cursor) query = { ...query, cursor };
@@ -47,11 +47,11 @@ export class BskyApi {
 type QueryType = { actor: string; limit: number; cursor?: string };
 
 type FollowersResponse = {
-  followers: BlueSkyUser[];
+  followers: UserType[];
   cursor?: string;
 };
 
 type FollowsResponse = {
-  follows: BlueSkyUser[];
+  follows: UserType[];
   cursor?: string;
 };

@@ -1,7 +1,6 @@
 import confetti from "canvas-confetti";
 
-import { ApiResquestFunction, InteractionsOptionsType } from "@/types";
-import { gradient } from "@/components/primitives";
+import { ApiResquestFunction } from "@/types";
 
 export function getRandomInt(min: number, max: number): number {
   min = Math.ceil(min);
@@ -90,36 +89,3 @@ export const handleConfetti = ({
     origin: { y: 0.6 },
   });
 };
-
-export const noPicture =
-  "https://cdn.bsky.app/img/avatar/plain/did:plc:bbymmiqltjwzyrikqh362efy/bafkreied5mcljllqvtebhxsvrbj7gci6qvuqqvxbectveemrkqv2seqwne@jpeg";
-
-export const interactionEmojis = {
-  kiss: { emoji: "💋", style: `${gradient({ color: "pink", size: "sm" })}` },
-  marry: { emoji: "👰‍♀️", style: "" },
-  slap: { emoji: "🖐️", style: "" },
-};
-
-export const interactionList: InteractionsOptionsType[] = [
-  {
-    key: "marry",
-    phrase: "Escolha alguem para",
-    word: "CASAR",
-    emoji: "👰‍♀️",
-    iconStyle: "",
-  },
-  {
-    key: "kiss",
-    phrase: "Escolhar alguem para",
-    word: "BEIJAR",
-    emoji: "💋",
-    iconStyle: `${gradient({ color: "pink", size: "sm" })}`,
-  },
-  {
-    key: "slap",
-    phrase: "Escolhar alguem para dar um",
-    word: "TAPA",
-    emoji: "🖐️",
-    iconStyle: "",
-  },
-];

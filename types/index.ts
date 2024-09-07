@@ -4,7 +4,7 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
 };
 
-export type BlueSkyUser = {
+export type UserType = {
   handle: string;
   displayName: string;
   avatar: string;
@@ -18,13 +18,13 @@ export type ApiResquestFunction = ({
   actor: string;
   cursor?: string;
 }) => Promise<{
-  data: BlueSkyUser[];
+  data: UserType[];
   cursor?: string;
 }>;
 
-export type InteractionsOptionsType = {
+export type InteractionType = {
   key?: "kiss" | "slap" | "marry";
-  phrase?: string;
+  quention?: string;
   emoji?: string;
   word?: string;
   iconStyle?: string;

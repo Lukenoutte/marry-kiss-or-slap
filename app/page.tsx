@@ -3,29 +3,33 @@
 import { useState } from "react";
 
 import { BskyApi } from "@/api/bsky-api";
-import UsernameProvider from "@/components/username-provider";
-import RandomUserSelection from "@/components/random-user-seletion";
+import UsernameProvider from "@/components/steps/username-provider";
+import RandomUserSelection from "@/components/steps/random-user-seletion";
 import { gradient } from "@/components/primitives";
-import { BlueSkyUser } from "@/types";
-import { repeatRequests } from "@/utils/shared";
-import ClassifyChosen from "@/components/classify-chosen";
+import { UserType } from "@/types";
+import { repeatRequests } from "@/utils/shared-functions";
+import ClassifyChosen from "@/components/steps/classify-chosen";
+import { errorMessage } from "@/utils";
 
 export default function Home() {
   const [serviceName, setServiceName] = useState<string>("bsky.social");
   const [username, setUsername] = useState<string>("");
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [chosenList, setChosenList] = useState<BlueSkyUser[]>([]);
-  const [followerList, setFollowerList] = useState<BlueSkyUser[]>([]);
-  const [followList, setFollowList] = useState<BlueSkyUser[]>([]);
+  const [chosenList, setChosenList] = useState<UserType[]>([]);
+  const [followerList, setFollowerList] = useState<UserType[]>([]);
+  const [followList, setFollowList] = useState<UserType[]>([]);
+  const [usernameError, setUsernameError] = useState<boolean>(false);
+  const [serviceNameError, setServiceNameError] = useState<boolean>(false);
+  const [messageError, setMessageError] = useState<string>("");
   const bskyApi = new BskyApi();
 
-  async function searchUserInfo() {
+  async function retrieveFollowsAndFollowers() {
     if (!username || !serviceName) return;
     setCurrentStep(2);
     setFollowerList([]);
     setFollowList([]);
-    const actor = `${username}.${serviceName}`;
+    const actor = `${username.trim()}.${serviceName.trim()}`;
 
     try {
       setIsLoading(true);
@@ -36,11 +40,25 @@ export default function Home() {
 
       setFollowerList(followersResult);
       setFollowList(followsResult);
+      setMessageError("");
     } catch (error) {
+      handleErrorMessage(error);
       setCurrentStep(1);
     } finally {
       setIsLoading(false);
     }
+  }
+
+  function handleErrorMessage(error: unknown) {
+    if (error instanceof Error) {
+      const errorMesage = error.message;
+
+      if (errorMesage.includes("Actor not found"))
+        return setMessageError(errorMessage.invalid);
+
+      return setMessageError(errorMessage.default);
+    }
+    setMessageError(errorMessage.default);
   }
 
   function onClickBackButton() {
@@ -65,11 +83,19 @@ export default function Home() {
             </h1>
             <div className="mt-8 w-[350px]">
               <UsernameProvider
+                errorHandler={{
+                  usernameError,
+                  setUsernameError,
+                  serviceNameError,
+                  setServiceNameError,
+                  messageError,
+                  setMessageError,
+                }}
                 serviceName={serviceName}
                 setServiceName={setServiceName}
                 setUsername={setUsername}
                 username={username}
-                onSubmit={searchUserInfo}
+                onSubmit={retrieveFollowsAndFollowers}
               />
             </div>
             <div className="mt-12 w-[350px]">
@@ -101,7 +127,7 @@ export default function Home() {
         )}
         {currentStep === 3 && (
           <div style={{ display: currentStep === 3 ? "block" : "none" }}>
-            <div className="mt-4">
+            <div>
               <ClassifyChosen
                 chosenList={chosenList}
                 onClickBackButton={onClickBackButton}
