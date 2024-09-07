@@ -31,22 +31,10 @@ export default function UsernameProvider({
     return isEmpty;
   }
 
-  function onError(error: unknown) {
-    if (error instanceof Error) {
-      const errorMesage = error.message;
-
-      if (errorMesage.includes("Actor not found"))
-        return errorHandler.setMessageError(errorMessage.invalid);
-
-      return errorHandler.setMessageError(errorMessage.default);
-    }
-    errorHandler.setMessageError(errorMessage.default);
-  }
-
   function beforeOnSubmit(e: FormEvent) {
     e.preventDefault();
     if (someFieldIsEmpty()) return;
-    onSubmit(onError);
+    onSubmit();
   }
 
   function onChangeUsername(username: string) {
@@ -115,7 +103,7 @@ type UsernameCardProps = {
   setServiceName: (name: string) => void;
   username: string;
   setUsername: (name: string) => void;
-  onSubmit: (handlErrorMessage: (error: unknown) => void) => void;
+  onSubmit: () => void;
   errorHandler: {
     usernameError: boolean;
     setUsernameError: (hasError: boolean) => void;
