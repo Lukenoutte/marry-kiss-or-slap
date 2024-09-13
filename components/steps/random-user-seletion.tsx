@@ -50,13 +50,13 @@ export default function RandomUserSelection({
   return (
     <div className="w-full">
       {isLoading && (
-        <div className="flex flex-row gap-4 justify-between">
+        <div className="flex flex-col lg:flex-row gap-4 justify-between">
           <CardSkeleton />
           <CardSkeleton />
           <CardSkeleton />
         </div>
       )}
-      <div className="flex flex-row gap-4 justify-between">
+      <div className="flex flex-col lg:flex-row gap-4 justify-between px-4">
         {chosenList.map((user, index) => (
           <div key={index}>
             <Card className="border-none p-2" radius="lg">
@@ -76,10 +76,10 @@ export default function RandomUserSelection({
           </div>
         ))}
       </div>
-      <div className="mt-8 flex justify-between">
-        <div className="w-1/3 flex justify-start">
+      <div className="mt-8 flex flex-col lg:flex-row lg:justify-between">
+        <div className="lg:w-1/3 flex justify-start">
           <Button
-            className="shadow-lg m"
+            className="shadow-lg w-full lg:w-auto"
             color="primary"
             disabled={isLoading}
             radius="full"
@@ -89,7 +89,7 @@ export default function RandomUserSelection({
           />
         </div>
         <Button
-          className="shadow-lg"
+          className="shadow-lg mt-3 lg:mt-0"
           color="primary"
           disabled={isLoading}
           endContent={<ShuffleIcon color="#0072F5" size={22} />}
@@ -99,9 +99,9 @@ export default function RandomUserSelection({
         >
           Escolher Outros
         </Button>
-        <div className="w-1/3 flex justify-end">
+        <div className="lg:w-1/3 flex lg:justify-end mt-3 lg:mt-0">
           <Button
-            className="bg-gradient-to-tr from-[#0072F5] to-[#5EA2EF] text-white shadow-lg"
+            className="bg-gradient-to-tr w-full lg:w-auto from-[#0072F5] to-[#5EA2EF] text-white shadow-lg"
             color="primary"
             disabled={isLoading}
             endContent={<ArrowRightIcon color="white" size={20} />}

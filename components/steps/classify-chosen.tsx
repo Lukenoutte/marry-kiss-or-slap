@@ -101,7 +101,7 @@ export default function ClassifyChosen({
   }
 
   return (
-    <div>
+    <div className="px-4">
       {HasSelectedInteraction() && (
         <div className="mb-4">
           <span className="mr-2 font-bold">{selectedInteraction.quention}</span>

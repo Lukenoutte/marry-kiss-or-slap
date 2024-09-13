@@ -81,7 +81,7 @@ export default function Home() {
               <span className={gradient({ color: "pink" })}>💋</span>
               🖐️
             </h1>
-            <div className="mt-8 w-[350px]">
+            <div className="mt-8 w-full px-2 lg:w-[350px]">
               <UsernameProvider
                 errorHandler={{
                   usernameError,
@@ -98,7 +98,7 @@ export default function Home() {
                 onSubmit={retrieveFollowsAndFollowers}
               />
             </div>
-            <div className="mt-12 w-[350px]">
+            <div className="mt-12 w-3/4 lg:w-[350px]">
               <p className="text-default-500 text-tiny">
                 Lembre-se de que o objetivo é entreter, então, se algo te deixar
                 desconfortável, não hesite em nos contatar.
@@ -108,7 +108,7 @@ export default function Home() {
         )}
         {currentStep === 2 && (
           <div>
-            <div className="flex flex-row items-center">
+            <div className="flex flex-row items-center px-4">
               <span className="text-4xl mr-4">🤔</span>
               <h2 className="font-bold">Os escolhidos foram...</h2>
             </div>
