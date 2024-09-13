@@ -6,16 +6,16 @@ import { Button } from "@nextui-org/button";
 import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/popover";
 import { useEffect, useMemo, useState } from "react";
 
-import { ArrowLeftIcon } from "../icons";
-import { gradient } from "../primitives";
-import PhraseCard from "../phrase-card";
-
 import { UserType, InteractionType } from "@/types";
 import { getRandomInt, handleConfetti } from "@/utils/shared-functions";
 import { interactionEmojis, interactionList, noPicture } from "@/utils/index";
 import { phraseKiss } from "@/utils/phrase-kiss";
 import { phraseMarry } from "@/utils/phrase-marry";
 import { phraseSlap } from "@/utils/phrase-slap";
+
+import PhraseCard from "../phrase-card";
+import { gradient } from "../primitives";
+import { ArrowLeftIcon } from "../icons";
 
 export default function ClassifyChosen({
   chosenList,

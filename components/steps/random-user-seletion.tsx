@@ -5,15 +5,15 @@ import { Image } from "@nextui-org/image";
 import { Button } from "@nextui-org/button";
 import React, { useEffect } from "react";
 
-import CardSkeleton from "../card-skeleton";
-import { ArrowLeftIcon, ArrowRightIcon, ShuffleIcon } from "../icons";
-
 import { noPicture } from "@/utils/index";
 import {
   hasDuplicateItems,
   returnRandomItensOnList,
 } from "@/utils/shared-functions";
 import { UserType } from "@/types";
+
+import { ArrowLeftIcon, ArrowRightIcon, ShuffleIcon } from "../icons";
+import CardSkeleton from "../card-skeleton";
 
 export default function RandomUserSelection({
   followerList,
@@ -24,7 +24,7 @@ export default function RandomUserSelection({
   setChosenList,
   chosenList,
 }: RandomUserSelectionProps) {
-  function getRandomUsers() {
+  function getRandomUsers(): void {
     let randomFollows: UserType[] = [];
     let randomFollowers: UserType[] = [];
 
