@@ -3,8 +3,8 @@ import { Card, CardBody } from "@nextui-org/card";
 import { Button } from "@nextui-org/button";
 import { FormEvent } from "react";
 
-import { CloudIcon, AtIcon, ErrorIcon } from "@/components/icons";
-import { errorMessage } from "@/utils";
+import { CloudIcon, AtIcon, ErrorIcon } from "@/src/components/icons";
+import { errorMessage } from "@/src/utils";
 
 export default function UsernameProvider({
   serviceName,

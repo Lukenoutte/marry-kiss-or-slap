@@ -1,5 +1,5 @@
-import { InteractionType } from "@/types";
-import { gradient } from "@/components/primitives";
+import { InteractionType } from "@/src/types";
+import { gradient } from "@/src/components/primitives";
 
 export const noPicture =
   "https://cdn.bsky.app/img/avatar/plain/did:plc:bbymmiqltjwzyrikqh362efy/bafkreied5mcljllqvtebhxsvrbj7gci6qvuqqvxbectveemrkqv2seqwne@jpeg";

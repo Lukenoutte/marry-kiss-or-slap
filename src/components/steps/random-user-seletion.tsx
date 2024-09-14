@@ -5,12 +5,12 @@ import { Image } from "@nextui-org/image";
 import { Button } from "@nextui-org/button";
 import React, { useEffect } from "react";
 
-import { noPicture } from "@/utils/index";
+import { noPicture } from "@/src/utils/index";
 import {
   hasDuplicateItems,
   returnRandomItensOnList,
-} from "@/utils/shared-functions";
-import { UserType } from "@/types";
+} from "@/src/utils/shared-functions";
+import { UserType } from "@/src/types";
 
 import { ArrowLeftIcon, ArrowRightIcon, ShuffleIcon } from "../icons";
 import CardSkeleton from "../card-skeleton";

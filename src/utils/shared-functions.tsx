@@ -1,6 +1,6 @@
 import confetti from "canvas-confetti";
 
-import { ApiResquestFunction } from "@/types";
+import { ApiResquestFunction } from "@/src/types";
 
 export function getRandomInt(min: number, max: number): number {
   min = Math.ceil(min);

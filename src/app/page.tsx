@@ -1,15 +1,16 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
-import { BskyApi } from "@/api/bsky-api";
-import UsernameProvider from "@/components/steps/username-provider";
-import RandomUserSelection from "@/components/steps/random-user-seletion";
-import { gradient } from "@/components/primitives";
-import { UserType } from "@/types";
-import { repeatRequests } from "@/utils/shared-functions";
-import ClassifyChosen from "@/components/steps/classify-chosen";
-import { errorMessage } from "@/utils";
+import UsernameProvider from "@/src/components/steps/username-provider";
+import { BskyApi } from "@/src/api/bsky-api";
+import { UserType } from "@/src/types";
+import { repeatRequests } from "@/src/utils/shared-functions";
+import { errorMessage } from "@/src/utils";
+import RandomUserSelection from "@/src/components/steps/random-user-seletion";
+import { gradient } from "@/src/components/primitives";
+import ClassifyChosen from "@/src/components/steps/classify-chosen";
 
 export default function Home() {
   const [serviceName, setServiceName] = useState<string>("bsky.social");
@@ -23,13 +24,14 @@ export default function Home() {
   const [serviceNameError, setServiceNameError] = useState<boolean>(false);
   const [messageError, setMessageError] = useState<string>("");
   const bskyApi = new BskyApi();
+  const t = useTranslations("HomePage");
 
   async function retrieveFollowsAndFollowers() {
     if (!username || !serviceName) return;
     setCurrentStep(2);
     setFollowerList([]);
     setFollowList([]);
-    const actor = `${username.trim()}.${serviceName.trim()}`;
+    const actor = `${username.trim()}.${serviceName.trim()}`.toLowerCase();
 
     try {
       setIsLoading(true);
@@ -74,6 +76,7 @@ export default function Home() {
   return (
     <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
       <div className="inline-block text-center justify-center items-center">
+        {t("title")}
         {currentStep === 1 && (
           <div className="flex-col flex items-center">
             <h1 className="text-5xl">

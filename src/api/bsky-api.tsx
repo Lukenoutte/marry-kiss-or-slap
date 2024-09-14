@@ -1,5 +1,5 @@
-import { UserType } from "@/types";
-import FetchWrapper from "@/utils/fetch";
+import { UserType } from "@/src/types";
+import FetchWrapper from "@/src/utils/fetch";
 
 const fetch = new FetchWrapper("https://public.api.bsky.app");
 

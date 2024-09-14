@@ -7,10 +7,10 @@ import {
 import { Link } from "@nextui-org/link";
 import NextLink from "next/link";
 
-import { gradient } from "@/components/primitives";
-import { siteConfig } from "@/config/site";
-import { ThemeSwitch } from "@/components/theme-switch";
-import { GithubIcon } from "@/components/icons";
+import { gradient } from "@/src/components/primitives";
+import { siteConfig } from "@/src/config/site";
+import { ThemeSwitch } from "@/src/components/theme-switch";
+import { GithubIcon } from "@/src/components/icons";
 
 export const Navbar = () => {
   return (

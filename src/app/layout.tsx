@@ -1,12 +1,14 @@
-import "@/styles/globals.css";
+import "@/src/styles/globals.css";
 import { Metadata, Viewport } from "next";
 import { Link } from "@nextui-org/link";
 import clsx from "clsx";
+import { getLocale, getMessages } from "next-intl/server";
+import { NextIntlClientProvider } from "next-intl";
 
-import { siteConfig } from "@/config/site";
-import { fontSans } from "@/config/fonts";
-import { Navbar } from "@/components/navbar";
-import { BlueSkyIcon } from "@/components/icons";
+import { siteConfig } from "@/src/config/site";
+import { fontSans } from "@/src/config/fonts";
+import { Navbar } from "@/src/components/navbar";
+import { BlueSkyIcon } from "@/src/components/icons";
 
 import { Providers } from "./providers";
 
@@ -28,13 +30,16 @@ export const viewport: Viewport = {
   ],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const locale = await getLocale();
+  const messages = await getMessages();
+
   return (
-    <html suppressHydrationWarning lang="en">
+    <html suppressHydrationWarning lang={locale}>
       <head />
       <body
         className={clsx(
@@ -42,11 +47,13 @@ export default function RootLayout({
           fontSans.variable,
         )}
       >
-        <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
+        <Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
           <div className="relative flex flex-col h-screen">
             <Navbar />
             <main className="container mx-auto flex-grow flex justify-center items-center">
-              {children}
+              <NextIntlClientProvider messages={messages}>
+                {children}
+              </NextIntlClientProvider>
             </main>
             <footer className="w-full flex items-center justify-center py-3">
               <Link
