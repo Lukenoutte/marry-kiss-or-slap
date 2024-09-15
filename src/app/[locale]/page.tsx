@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 import UsernameProvider from "@/src/components/steps/username-provider";
 import { BskyApi } from "@/src/api/bsky-api";
@@ -25,6 +25,7 @@ export default function Home() {
   const [messageError, setMessageError] = useState<string>("");
   const bskyApi = new BskyApi();
   const t = useTranslations();
+  const localActive = useLocale() as "pt-br" | "en";
 
   async function retrieveFollowsAndFollowers() {
     if (!username || !serviceName) return;
@@ -52,15 +53,17 @@ export default function Home() {
   }
 
   function handleErrorMessage(error: unknown) {
+    const currentErroMessageList = errorMessage[localActive];
+
     if (error instanceof Error) {
       const errorMesage = error.message;
 
       if (errorMesage.includes("Actor not found"))
-        return setMessageError(errorMessage.invalid);
+        return setMessageError(currentErroMessageList.invalid);
 
-      return setMessageError(errorMessage.default);
+      return setMessageError(currentErroMessageList.default);
     }
-    setMessageError(errorMessage.default);
+    setMessageError(currentErroMessageList.default);
   }
 
   function onClickBackButton() {
@@ -109,7 +112,7 @@ export default function Home() {
           <div>
             <div className="flex flex-row items-center px-4">
               <span className="text-4xl mr-4">🤔</span>
-              <h2 className="font-bold">Os escolhidos foram...</h2>
+              <h2 className="font-bold">{t("chosen_ones")}</h2>
             </div>
             <div className="mt-4">
               <RandomUserSelection

@@ -5,17 +5,15 @@ import { Image } from "@nextui-org/image";
 import { Button } from "@nextui-org/button";
 import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/popover";
 import { useEffect, useMemo, useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
 
 import { UserType, InteractionType } from "@/src/types";
 import { getRandomInt, handleConfetti } from "@/src/utils/shared-functions";
-import {
-  interactionEmojis,
-  interactionList,
-  noPicture,
-} from "@/src/utils/index";
-import { phraseKiss } from "@/src/utils/phrase-kiss";
-import { phraseMarry } from "@/src/utils/phrase-marry";
-import { phraseSlap } from "@/src/utils/phrase-slap";
+import { interactionEmojis, noPicture } from "@/src/utils/index";
+import { phraseKiss } from "@/src/utils";
+import { phraseMarry } from "@/src/utils";
+import { phraseSlap } from "@/src/utils";
+import { interactionList } from "@/src/utils";
 
 import PhraseCard from "../phrase-card";
 import { gradient } from "../primitives";
@@ -28,19 +26,22 @@ export default function ClassifyChosen({
   const [popoverOpenIndex, setPopoverOpenIndex] = useState<number>(-1);
   const [selectedInteraction, setSelectedInteraction] =
     useState<InteractionType>({});
+  const t = useTranslations();
+  const localActive = useLocale() as "pt-br" | "en";
 
   const phrasesOptions: {
     kiss: ((user: string) => string)[];
     marry: ((user: string) => string)[];
     slap: ((user: string) => string)[];
   } = {
-    kiss: phraseKiss,
-    marry: phraseMarry,
-    slap: phraseSlap,
+    kiss: phraseKiss[localActive],
+    marry: phraseMarry[localActive],
+    slap: phraseSlap[localActive],
   };
 
-  const [interactionOptions, setInteractionOptions] =
-    useState<InteractionType[]>(interactionList);
+  const [interactionOptions, setInteractionOptions] = useState<
+    InteractionType[]
+  >(interactionList[localActive]);
 
   const [displayedPhraseList, setDisplayedPhraseList] = useState<
     DisplayedPhraseListType[]
@@ -89,7 +90,7 @@ export default function ClassifyChosen({
 
   function beforeClickBackButton() {
     setSelectedInteraction({});
-    setInteractionOptions(interactionList);
+    setInteractionOptions(interactionList[localActive]);
     chosenList.forEach((user) => (user.interaction = undefined));
     onClickBackButton();
   }
@@ -177,6 +178,7 @@ export default function ClassifyChosen({
           color="primary"
           radius="full"
           startContent={<ArrowLeftIcon color="#0072F5" size={20} />}
+          title={t("go_back")}
           variant="bordered"
           onClick={beforeClickBackButton}
         />

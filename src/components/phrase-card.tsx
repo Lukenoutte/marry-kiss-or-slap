@@ -24,7 +24,7 @@ export default function PhraseCard({ user, phrase }: PhraseCardProps) {
           }
           name={user.displayName}
         />
-        <div className="flex mt-6 lg:mt-0 lg:border-l lg:border-gray-300 lg:pl-4">
+        <div className="flex text-start mt-3 pt-3 border-t lg:border-t-0 lg:mt-0 lg:border-l border-gray-300 lg:pl-4">
           {phrase(user.displayName)}
         </div>
       </div>

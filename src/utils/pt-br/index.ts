@@ -1,16 +1,7 @@
-import { InteractionType } from "@/src/types";
 import { gradient } from "@/src/components/primitives";
+import { InteractionType } from "@/src/types";
 
-export const noPicture =
-  "https://cdn.bsky.app/img/avatar/plain/did:plc:bbymmiqltjwzyrikqh362efy/bafkreied5mcljllqvtebhxsvrbj7gci6qvuqqvxbectveemrkqv2seqwne@jpeg";
-
-export const interactionEmojis = {
-  kiss: { emoji: "💋", style: `${gradient({ color: "pink", size: "sm" })}` },
-  marry: { emoji: "👰‍♀️", style: "" },
-  slap: { emoji: "🖐️", style: "" },
-};
-
-export const interactionList: InteractionType[] = [
+export const interactionListPortuguese: InteractionType[] = [
   {
     key: "marry",
     quention: "Escolha alguém para",
@@ -34,7 +25,7 @@ export const interactionList: InteractionType[] = [
   },
 ];
 
-export const errorMessage = {
+export const errorMessagePortuguese = {
   empty: "Atenção: Campo vazio!",
   default: "Ops, algo deu errado :(",
   invalid: "Usuário não encontrado!",

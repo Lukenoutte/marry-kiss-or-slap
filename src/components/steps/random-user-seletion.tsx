@@ -14,6 +14,7 @@ import { UserType } from "@/src/types";
 
 import { ArrowLeftIcon, ArrowRightIcon, ShuffleIcon } from "../icons";
 import CardSkeleton from "../card-skeleton";
+import { useTranslations } from "next-intl";
 
 export default function RandomUserSelection({
   followerList,
@@ -46,6 +47,8 @@ export default function RandomUserSelection({
   useEffect(() => {
     if (!chosenList.length) getRandomUsers();
   }, [isLoading]);
+
+  const t = useTranslations();
 
   return (
     <div className="w-full">
@@ -84,6 +87,7 @@ export default function RandomUserSelection({
             disabled={isLoading}
             radius="full"
             startContent={<ArrowLeftIcon color="#0072F5" size={20} />}
+            title={t("go_back")}
             variant="bordered"
             onClick={onClickBackButton}
           />
@@ -97,7 +101,7 @@ export default function RandomUserSelection({
           variant="bordered"
           onClick={getRandomUsers}
         >
-          Escolher Outros
+          {t("pick_others")}
         </Button>
         <div className="lg:w-1/3 flex lg:justify-end mt-3 lg:mt-0">
           <Button
@@ -106,10 +110,11 @@ export default function RandomUserSelection({
             disabled={isLoading}
             endContent={<ArrowRightIcon color="white" size={20} />}
             radius="full"
+            title={t("continue")}
             variant="shadow"
             onClick={() => setCurrentStep(3)}
           >
-            Continue
+            {t("continue")}
           </Button>
         </div>
       </div>

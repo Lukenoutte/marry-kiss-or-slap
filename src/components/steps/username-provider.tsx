@@ -2,6 +2,7 @@ import { Input } from "@nextui-org/input";
 import { Card, CardBody } from "@nextui-org/card";
 import { Button } from "@nextui-org/button";
 import { FormEvent } from "react";
+import { useLocale, useTranslations } from "next-intl";
 
 import { CloudIcon, AtIcon, ErrorIcon } from "@/src/components/icons";
 import { errorMessage } from "@/src/utils";
@@ -14,10 +15,12 @@ export default function UsernameProvider({
   onSubmit,
   errorHandler,
 }: UsernameCardProps) {
+  const localActive = useLocale() as "pt-br" | "en";
+
   function someFieldIsEmpty() {
     let isEmpty = false;
 
-    errorHandler.setMessageError(errorMessage.empty);
+    errorHandler.setMessageError(errorMessage[localActive].empty);
     if (!username.trim()) {
       errorHandler.setUsernameError(true);
       isEmpty = true;
@@ -48,6 +51,7 @@ export default function UsernameProvider({
     errorHandler.setServiceNameError(false);
     setServiceName(serviceName);
   }
+  const t = useTranslations();
 
   return (
     <Card>
@@ -66,7 +70,7 @@ export default function UsernameProvider({
           <Input
             isInvalid={errorHandler.usernameError}
             labelPlacement="inside"
-            placeholder="Username"
+            placeholder={t("username")}
             startContent={<AtIcon />}
             type="text"
             value={username}
@@ -77,7 +81,7 @@ export default function UsernameProvider({
             className="mt-3"
             isInvalid={errorHandler.serviceNameError}
             labelPlacement="inside"
-            placeholder="Service"
+            placeholder={t("service")}
             startContent={<CloudIcon />}
             type="text"
             value={serviceName}
@@ -87,10 +91,11 @@ export default function UsernameProvider({
             className="w-full bg-gradient-to-tr from-[#0072F5] to-[#5EA2EF] text-white shadow-lg mt-4"
             color="primary"
             radius="full"
+            title={t("continue")}
             type="submit"
             variant="shadow"
           >
-            Continue
+            {t("continue")}
           </Button>
         </form>
       </CardBody>

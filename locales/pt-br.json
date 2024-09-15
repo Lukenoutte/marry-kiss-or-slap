@@ -1,4 +1,10 @@
 {
-    "title": "Olá mundo!",
-    "warning": "Lembre-se de que o objetivo é entreter, então, se algo te deixar desconfortável, não hesite em nos contatar."
+    "warning": "Lembre-se de que o objetivo é entreter, então, se algo te deixar desconfortável, não hesite em nos contatar.",
+    "username": "Usuário",
+    "service": "Serviço",
+    "powered_by": "Desenvolvido por",
+    "continue": "Continuar",
+    "chosen_ones": "Os escolhidos foram...",
+    "pick_others": "Escolha outros",
+    "go_back": "Voltar"
 }

@@ -24,7 +24,7 @@ export default function NotFoundPage() {
             <Image
               alt="404 not found"
               className="object-cover w-full lg:w-[500px] lg:h-[300px]"
-              src="https://raw.githubusercontent.com/SAWARATSUKI/KawaiiLogos/main/ResponseCode/404%20NotFound.png"
+              src="/404.png"
               title="Image by: @SAWARATSUKI"
             />
           </div>

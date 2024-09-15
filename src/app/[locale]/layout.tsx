@@ -3,7 +3,7 @@ import { Metadata, Viewport } from "next";
 import { Link } from "@nextui-org/link";
 import clsx from "clsx";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import { getMessages, getTranslations } from "next-intl/server";
 
 import { siteConfig } from "@/src/config/site";
 import { fontSans } from "@/src/config/fonts";
@@ -40,6 +40,7 @@ export default async function LocaleLayout({
   };
 }) {
   const messages = await getMessages();
+  const t = await getTranslations();
 
   return (
     <html suppressHydrationWarning lang={locale}>
@@ -65,7 +66,9 @@ export default async function LocaleLayout({
                 href="https://bsky.app/profile/lukenoutte.bsky.social"
                 title="bsky profile"
               >
-                <span className="text-default-500 text-xs">Powered by</span>
+                <span className="text-default-500 text-xs">
+                  {t("powered_by")}
+                </span>
                 <p className="text-primary text-xs">Lukenoutte</p>
                 <BlueSkyIcon size={17} />
               </Link>
