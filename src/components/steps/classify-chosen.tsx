@@ -8,7 +8,11 @@ import { useEffect, useMemo, useState } from "react";
 
 import { UserType, InteractionType } from "@/src/types";
 import { getRandomInt, handleConfetti } from "@/src/utils/shared-functions";
-import { interactionEmojis, interactionList, noPicture } from "@/src/utils/index";
+import {
+  interactionEmojis,
+  interactionList,
+  noPicture,
+} from "@/src/utils/index";
 import { phraseKiss } from "@/src/utils/phrase-kiss";
 import { phraseMarry } from "@/src/utils/phrase-marry";
 import { phraseSlap } from "@/src/utils/phrase-slap";
@@ -25,7 +29,11 @@ export default function ClassifyChosen({
   const [selectedInteraction, setSelectedInteraction] =
     useState<InteractionType>({});
 
-  const phrasesOptions: { kiss: string[]; marry: string[]; slap: string[] } = {
+  const phrasesOptions: {
+    kiss: ((user: string) => string)[];
+    marry: ((user: string) => string)[];
+    slap: ((user: string) => string)[];
+  } = {
     kiss: phraseKiss,
     marry: phraseMarry,
     slap: phraseSlap,
@@ -192,7 +200,7 @@ type ClassifyChosenProps = {
 };
 
 type DisplayedPhraseListType = {
-  phrase: string;
+  phrase: (user: string) => string;
   interation: InteractionType;
   user: UserType;
 };

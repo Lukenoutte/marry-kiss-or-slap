@@ -12,11 +12,17 @@ import { siteConfig } from "@/src/config/site";
 import { ThemeSwitch } from "@/src/components/theme-switch";
 import { GithubIcon } from "@/src/components/icons";
 
-export const Navbar = () => {
+import LocalSwitch from "./local-switch";
+
+export const Navbar = ({
+  hideLocalSwitch = false,
+}: {
+  hideLocalSwitch?: boolean;
+}) => {
   return (
     <NextUINavbar maxWidth="full" position="sticky">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
-        <NavbarBrand as="li" className="gap-3 max-w-fit">
+        <NavbarBrand as="li" className="gap-3 max-w-fit hidden lg:block">
           <NextLink className="flex justify-start items-center gap-1" href="/">
             <p className={gradient({ color: "blue", size: "sm" })}>
               Marry, Kiss or
@@ -48,6 +54,7 @@ export const Navbar = () => {
         </Link>
         <ThemeSwitch />
       </NavbarContent>
+      {!hideLocalSwitch && <LocalSwitch />}
     </NextUINavbar>
   );
 };

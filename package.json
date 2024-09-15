@@ -16,6 +16,7 @@
 		"@nextui-org/link": "2.0.34",
 		"@nextui-org/navbar": "2.0.36",
 		"@nextui-org/popover": "^2.1.27",
+		"@nextui-org/select": "^2.2.6",
 		"@nextui-org/skeleton": "^2.0.31",
 		"@nextui-org/switch": "2.0.33",
 		"@nextui-org/system": "2.2.5",

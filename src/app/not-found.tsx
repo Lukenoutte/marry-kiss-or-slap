@@ -18,7 +18,7 @@ export default function NotFoundPage() {
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
           <div>
-            <Navbar />
+            <Navbar hideLocalSwitch={true} />
           </div>
           <div className="flex min-h-[calc(100vh-100px)] justify-center items-center">
             <Image

@@ -15,7 +15,7 @@ export const gradient = tv({
     },
     size: {
       xs: "text-md lg:text-lg",
-      sm: "text-xl lg:text-2xl",
+      sm: "text-md lg:text-2xl",
       md: "text-[2.3rem] lg:text-5xl leading-9",
       lg: "text-4xl lg:text-6xl",
     },
