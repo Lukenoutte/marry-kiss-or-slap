@@ -12,7 +12,7 @@ export default function PhraseCard({ user, phrase }: PhraseCardProps) {
           avatarProps={{
             src: user.avatar,
           }}
-          className="mr-6 lg:w-1/3 flex justify-start"
+          className="mr-6 flex justify-start"
           description={
             <Link
               isExternal
