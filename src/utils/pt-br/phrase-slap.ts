@@ -127,19 +127,19 @@ export const phraseSlapPortuguese = [
   (user: string) =>
     `Durante um jogo de cartas, ${user} trapaceia descaradamente, e você não resiste e dá um tapa nele. 🃏🖐️😁`,
   (user: string) =>
-    `Você dá um tapa em ${user} porque ele trocou sua música favorita na playlist justo no refrão. 🎶🖐️😤`,
+    `Você dá um tapa em ${user} porque trocou sua música favorita na playlist justo no refrão. 🎶🖐️😤`,
   (user: string) =>
     `Durante um jantar, ${user} resolve tirar sarro da sua comida preferida, e você dá um tapa nele. 🍝🖐️😁`,
   (user: string) =>
-    `Você dá um tapa em ${user} porque ele ficou rindo quando você tropeçou na rua. 🚶‍♂️🖐️😠`,
+    `Você dá um tapa em ${user} porque ele(a) ficou rindo quando você tropeçou na rua. 🚶‍♂️🖐️😠`,
   (user: string) =>
     `Vocês estão assistindo uma série juntos e ${user} avança episódios sem você, merecendo um tapa por isso. 📺🖐️😠`,
   (user: string) =>
-    `Você dá um tapa em ${user} porque ele comeu a sobremesa que você estava guardando para mais tarde. 🍨🖐️😒`,
+    `Você dá um tapa em ${user} porque comeu a sobremesa que você estava guardando para mais tarde. 🍨🖐️😒`,
   (user: string) =>
-    `Você dá um tapa em ${user} porque ele fez uma brincadeira de mau gosto sobre sua roupa nova. 👗🖐️😒`,
+    `Você dá um tapa em ${user} porque fez uma brincadeira de mau gosto sobre sua roupa nova. 👗🖐️😒`,
   (user: string) =>
     `Você dá um tapa em ${user} por deixar a casa uma bagunça enquanto você limpava tudo. 🧹🖐️😤`,
   (user: string) =>
-    `Você dá um tapa em ${user} porque ele prometeu te ajudar com a mudança, mas passou o tempo todo sentado. 📦🖐️😒`,
+    `Você dá um tapa em ${user} porque prometeu te ajudar com a mudança, mas passou o tempo todo sentado. 📦🖐️😒`,
 ];
