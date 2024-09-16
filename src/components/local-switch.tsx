@@ -17,6 +17,8 @@ export default function LocalSwitch() {
   function useOnChangeSelect(selected: any) {
     const nextLocale = selected.currentKey;
 
+    if (!nextLocale) return;
+
     startTransition(() => {
       router.replace(`/${nextLocale}`);
     });

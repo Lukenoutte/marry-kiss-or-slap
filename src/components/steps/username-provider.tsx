@@ -66,8 +66,11 @@ export default function UsernameProvider({
             </span>
           </div>
         )}
-        <form className="mt-3" onSubmit={(e) => beforeOnSubmit(e)}>
+        <form className="mt-3 text-3xl" onSubmit={(e) => beforeOnSubmit(e)}>
           <Input
+            classNames={{
+              input: "text-[16px] lg:text-[14px] ",
+            }}
             isInvalid={errorHandler.usernameError}
             labelPlacement="inside"
             placeholder={t("username")}
@@ -79,6 +82,9 @@ export default function UsernameProvider({
           <Input
             isClearable
             className="mt-3"
+            classNames={{
+              input: "text-[16px] lg:text-[14px] ",
+            }}
             isInvalid={errorHandler.serviceNameError}
             labelPlacement="inside"
             placeholder={t("service")}
