@@ -6,12 +6,6 @@ This site was created for fun; you need a [Blue Sky](https://bsky.app/) account 
 ![Screenshot from 2024-09-23 12-13-57](https://github.com/user-attachments/assets/63664dbb-7039-4e18-a927-7c73d1a5e99d)
 ![Screenshot from 2024-09-23 12-16-41](https://github.com/user-attachments/assets/8a26ea87-c991-4669-bd03-1920a731b58e)
 
-# Next.js & NextUI Template
-
-This is a template for creating applications using Next.js 14 (app directory) and NextUI (v2).
-
-[Try it on CodeSandbox](https://githubbox.com/nextui-org/next-app-template)
-
 ## Technologies Used
 
 - [Next.js 14](https://nextjs.org/docs/getting-started)
@@ -21,16 +15,6 @@ This is a template for creating applications using Next.js 14 (app directory) an
 - [TypeScript](https://www.typescriptlang.org/)
 - [Framer Motion](https://www.framer.com/motion/)
 - [next-themes](https://github.com/pacocoursey/next-themes)
-
-## How to Use
-
-### Use the template with create-next-app
-
-To create a new project based on this template using `create-next-app`, run the following command:
-
-```bash
-npx create-next-app -e https://github.com/nextui-org/next-app-template
-```
 
 ### Install dependencies
 
