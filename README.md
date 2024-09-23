@@ -1,3 +1,11 @@
+# Marry, Kiss or Slap
+
+This site was created for fun; you need a [Blue Sky](https://bsky.app/) account to use it.
+
+![Screenshot from 2024-09-23 12-13-47](https://github.com/user-attachments/assets/0542a876-72ce-41ef-9a2c-371da00ee147)
+![Screenshot from 2024-09-23 12-13-57](https://github.com/user-attachments/assets/63664dbb-7039-4e18-a927-7c73d1a5e99d)
+![Screenshot from 2024-09-23 12-16-41](https://github.com/user-attachments/assets/8a26ea87-c991-4669-bd03-1920a731b58e)
+
 # Next.js & NextUI Template
 
 This is a template for creating applications using Next.js 14 (app directory) and NextUI (v2).
