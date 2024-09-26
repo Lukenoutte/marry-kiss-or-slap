@@ -110,8 +110,8 @@ export default function ClassifyChosen({
   }
 
   return (
-    <div className="px-4 flex justify-center">
-      <div className="lg:w-5/7">
+    <div className="px-4 flex justify-center w-full">
+      <div className="lg:w-4/5">
         {HasSelectedInteraction() && (
           <div className="mb-4">
             <span className="mr-2 font-bold">
