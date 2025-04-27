@@ -59,20 +59,6 @@ export default async function LocaleLayout({
                 {children}
               </NextIntlClientProvider>
             </main>
-            <footer className="w-full flex items-center justify-center py-3">
-              <Link
-                isExternal
-                className="flex items-center gap-1 text-current"
-                href="https://bsky.app/profile/lukenoutte.bsky.social"
-                title="bsky profile"
-              >
-                <span className="text-default-500 text-xs">
-                  {t("powered_by")}
-                </span>
-                <p className="text-primary text-xs">Lukenoutte</p>
-                <BlueSkyIcon size={17} />
-              </Link>
-            </footer>
           </div>
         </Providers>
       </body>

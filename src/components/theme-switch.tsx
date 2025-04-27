@@ -39,7 +39,7 @@ export const ThemeSwitch: FC<ThemeSwitchProps> = ({
   });
 
   return (
-    <div>
+    <div className="flex items-center justify-center">
       {/* @ts-expect-error Server Component */}
       <SwitchComponent
         {...getBaseProps({
